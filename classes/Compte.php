@@ -11,14 +11,16 @@ class Compte
      *
      * @var string
      */
-    public $titulaire;
+    private $titulaire;
 
     /**
      * solde du compte
      *
      * @var float
      */
-    public $solde;
+    private $solde;
+
+    const TAUX_INTERET = 5;
 
     //Methodes
     /**
@@ -31,11 +33,74 @@ class Compte
     {
         //on attribut $nom a la propriete titulaire de l'instance cree
         $this->titulaire = $nom;
-        $this->solde = $montant;
+
+        //on atttribut le montant a la proprieter du compte
+        $this->solde = $montant + ($montant * self::TAUX_INTERET)/100;
+    }
+
+    
+    
+    //Accesseur
+    /**
+     * Methode magique pour la convertion en chaine de caractere
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return "Vous visualiser le compte de $this->titulaire, le solde est de $this->solde euros";
+    }
+    /**
+     *Return le valeur titulaire du compte
+     *
+     * @return string
+     */
+    public function getTitutlaire(): string
+    {
+        return $this->titulaire;
     }
 
     /**
-     * DEposer de l'argent sur le compte
+     *modifie le valeur titulaire du compte
+     *
+     * @return string
+     */
+    public function setTitutlaire(string $nom): self
+    {
+        // if ($nom != "") {
+            $this->titulaire = $nom;
+        // }
+        return $this;
+    }
+
+    /**
+     * Return la valeur du solde
+     *
+     * @return float
+     */
+    public function getSolde(): float
+    {
+        return $this->solde;
+
+
+    }
+
+    /**
+     * Modifie la valeur du solde
+     *
+     * @param float $montant montant du solde
+     * @return self
+     */
+    public function setSolde(float $montant): self
+    {
+        if ($montant > 0) {
+            $this->solde = $montant;
+        }
+        return $this;
+    }
+
+    /**
+     * Deposer de l'argent sur le compte
      *
      * @param float $montant
      * @return void
@@ -62,10 +127,20 @@ class Compte
     {
         if ($montant > 0 && $this->solde >= $montant) {
             $this->solde -= $montant;
-        }
-        else 
-        {
+        } else {
             echo "Montant insuffisant ou invalide";
+        }
+        // echo $this->decouverte();
+    }
+
+    private function decouverte()
+    {
+        if($this->solde < 0){
+            return "Vous etes a decouvert";
+        }
+        else
+        {
+            return "Vous n'etes pas a decouvert";
         }
     }
 }
