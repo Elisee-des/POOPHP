@@ -1,11 +1,12 @@
 <?php
 
-/**
- * Compte Epargne avec taux d'interet
- */
-class CompteEpargneCourant extends CompteEpargne
-{
+namespace App\Banque;
 
+/**
+ * Compte bancaire (herite de Compte)
+ */
+class CompteCourant extends Compte
+{
     private $decouvert;
 
     /**
@@ -15,9 +16,9 @@ class CompteEpargneCourant extends CompteEpargne
      * @param integer $montant
      * @param integer $decouvert decouvert autoriser
      */
-    public function __construct(string $nom, int $montant, int $taux, int $decouvert)
+    public function __construct(string $nom, int $montant, int $decouvert)
     {
-        parent::__construct($nom, $montant, $taux);
+        parent::__construct($nom, $montant);
         $this->decouvert = $decouvert;
     }
 
