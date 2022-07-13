@@ -3,7 +3,7 @@
 /**
  * Objet compte bancaire
  */
-class Compte
+abstract class Compte
 {
     //Proprietes
     /**
@@ -18,9 +18,7 @@ class Compte
      *
      * @var float
      */
-    private $solde;
-
-    const TAUX_INTERET = 5;
+    protected $solde;
 
     //Methodes
     /**
@@ -33,9 +31,7 @@ class Compte
     {
         //on attribut $nom a la propriete titulaire de l'instance cree
         $this->titulaire = $nom;
-
-        //on atttribut le montant a la proprieter du compte
-        $this->solde = $montant + ($montant * self::TAUX_INTERET)/100;
+        $this->solde = $montant;
     }
 
     
@@ -81,8 +77,6 @@ class Compte
     public function getSolde(): float
     {
         return $this->solde;
-
-
     }
 
     /**
@@ -131,16 +125,5 @@ class Compte
             echo "Montant insuffisant ou invalide";
         }
         // echo $this->decouverte();
-    }
-
-    private function decouverte()
-    {
-        if($this->solde < 0){
-            return "Vous etes a decouvert";
-        }
-        else
-        {
-            return "Vous n'etes pas a decouvert";
-        }
     }
 }
