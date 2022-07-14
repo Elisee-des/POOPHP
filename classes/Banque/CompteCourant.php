@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Banque;
+use App\Client\Compte as CompteClient;
 
 /**
  * Compte bancaire (herite de Compte)
@@ -12,13 +13,13 @@ class CompteCourant extends Compte
     /**
      * Constructeur de compte courant
      *
-     * @param string $nom
+     * @param CompteClient $compte du client
      * @param integer $montant
      * @param integer $decouvert decouvert autoriser
      */
-    public function __construct(string $nom, int $montant, int $decouvert)
+    public function __construct(CompteClient $compte, int $montant, int $decouvert)
     {
-        parent::__construct($nom, $montant);
+        parent::__construct($compte, $montant);
         $this->decouvert = $decouvert;
     }
 

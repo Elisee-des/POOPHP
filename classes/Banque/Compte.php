@@ -2,6 +2,8 @@
 
 namespace App\Banque;
 
+use App\Client\Compte as CompteClient;
+
 /**
  * Objet compte bancaire
  */
@@ -13,7 +15,7 @@ abstract class Compte
      *
      * @var string
      */
-    private $titulaire;
+    private CompteClient $titulaire;
 
     /**
      * solde du compte
@@ -26,13 +28,13 @@ abstract class Compte
     /**
      * Constructeur du compte bancaire
      *
-     * @param string $nom Nom du titulaire du compte
+     * @param CompteClient $nom Nom du titulaire du compte
      * @param float $montant pour le montant du compte d l'ouverture
      */
-    public function __construct(string $nom, float $montant = 100)
+    public function __construct(CompteClient $compte, float $montant = 100)
     {
         //on attribut $nom a la propriete titulaire de l'instance cree
-        $this->titulaire = $nom;
+        $this->titulaire = $compte;
         $this->solde = $montant;
     }
 
@@ -51,23 +53,24 @@ abstract class Compte
     /**
      *Return le valeur titulaire du compte
      *
-     * @return string
+     * @return CompteClient
      */
-    public function getTitutlaire(): string
+    public function getTitutlaire()
     {
         return $this->titulaire;
     }
 
     /**
-     *modifie le valeur titulaire du compte
+     * Undocumented function
      *
-     * @return string
+     * @param CompteClient $compte du client
+     * @return Compte compte bancaire
      */
-    public function setTitutlaire(string $nom): self
+    public function setTitutlaire(CompteClient $compte): self
     {
-        // if ($nom != "") {
-            $this->titulaire = $nom;
-        // }
+        if (isset($compte)) {
+            $this->titulaire = $compte;
+        }
         return $this;
     }
 
